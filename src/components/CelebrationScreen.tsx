@@ -107,7 +107,7 @@ const CelebrationScreen = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
         >
-          Verneise Seah & You are now officially Valentines! 🎉
+          Verneise Seah & Kwun are now officially Valentines! 🎉
         </motion.p>
 
         {/* Terminal-style jokes */}
