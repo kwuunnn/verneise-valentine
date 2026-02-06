@@ -83,7 +83,9 @@ const ValentineQuestion = ({ onAccept }: ValentineQuestionProps) => {
       addStatusMessage("🔀 Buttons swapped. Oops, dev bug! 😅");
     } else if (attempt === 4) {
       setIsSwapped(false);
-      addStatusMessage("🐛 Button positions corrupted. Not a bug, it's a feature.");
+      addStatusMessage(
+        "🐛 Button positions corrupted. Not a bug, it's a feature.",
+      );
     }
 
     // Always move the button
@@ -182,10 +184,10 @@ const ValentineQuestion = ({ onAccept }: ValentineQuestionProps) => {
         </motion.div>
 
         <h1 className="text-2xl sm:text-4xl font-bold text-foreground mb-2 leading-tight">
-          Verneise Seash,
+          Verneise Seah,
         </h1>
         <h2 className="text-xl sm:text-3xl font-bold text-gradient-valentine mb-8">
-          will you be my Valentine?
+          Will you be my Valentine?
         </h2>
 
         {/* Buttons */}
