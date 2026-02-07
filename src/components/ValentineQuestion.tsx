@@ -7,14 +7,7 @@ interface ValentineQuestionProps {
 }
 
 const ERROR_MESSAGES = [
-  "Error 403: Permission to say 'No' denied. 🚫",
-  "TypeError: 'No' is not a valid response. Expected: 'Yes' | 'Absolutely' | 'Of course'",
-  "FATAL: rejection.exe has stopped working. Windows is searching for a solution... 💀",
-  "WARNING: Clicking 'No' may cause irreversible sadness. Proceed? (just kidding, you can't)",
-  "Error 418: I'm a teapot. Also, 'No' is not in my vocabulary. ☕",
-  "BSOD: Blue Screen of Denial — your rejection has been rejected.",
-  "npm ERR! ERESOLVE unable to resolve 'no' to a valid emotion",
-  "Segfault: attempted to access forbidden memory region 'rejection_zone'",
+  "Choosing ‘No’ might be a little sad — but it’s not really an option.",
 ];
 
 const BUTTON_REACTIONS = [
@@ -36,6 +29,7 @@ const ValentineQuestion = ({ onAccept }: ValentineQuestionProps) => {
   const [noText, setNoText] = useState("No 😐");
   const [yesScale, setYesScale] = useState(1);
   const [isSwapped, setIsSwapped] = useState(false);
+  const [hideNoButton, setHideNoButton] = useState(false);
   const [statusMessages, setStatusMessages] = useState<string[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -64,10 +58,9 @@ const ValentineQuestion = ({ onAccept }: ValentineQuestionProps) => {
     setNoText(BUTTON_REACTIONS[attempt % BUTTON_REACTIONS.length]);
 
     if (attempt >= maxAttempts) {
-      // Auto-accept after max attempts
-      addStatusMessage("⚠️ Maximum rejection attempts exceeded.");
-      addStatusMessage("🔄 Auto-selecting 'Yes'...");
-      setTimeout(() => onAccept(), 1500);
+      addStatusMessage("You can't say 'No' now.");
+      addStatusMessage("Only one choice left 🙂");
+      setHideNoButton(true);
       return;
     }
 
@@ -80,12 +73,10 @@ const ValentineQuestion = ({ onAccept }: ValentineQuestionProps) => {
 
     if (attempt === 2) {
       setIsSwapped(true);
-      addStatusMessage("🔀 Buttons swapped. Oops, dev bug! 😅");
+      addStatusMessage("The buttons switched places, but nothing’s changed 🙂");
     } else if (attempt === 4) {
       setIsSwapped(false);
-      addStatusMessage(
-        "🐛 Button positions corrupted. Not a bug, it's a feature.",
-      );
+      addStatusMessage("Back to normal — still the same answer");
     }
 
     // Always move the button
@@ -93,20 +84,20 @@ const ValentineQuestion = ({ onAccept }: ValentineQuestionProps) => {
 
     // Status messages
     const statusOpts = [
-      `❌ Rejection attempt #${attempt} failed.`,
-      `🔍 Searching for 'No' handler... not found.`,
-      `💔 Error: Cannot break heart. Permission denied.`,
-      `📊 Rejection rate: 0% (hardcoded)`,
-      `🔧 Attempting to patch rejection module... patch rejected.`,
+      `Rejection attempt #${attempt} didn’t work.`,
+      `Looks like “No” isn’t an option.`,
+      `That didn’t change anything.`,
+      `Rejection rate: 0%.`,
+      `Still not getting rejected.`,
     ];
     addStatusMessage(statusOpts[attempt % statusOpts.length]);
   }, [noAttempts, moveNoButton, addStatusMessage, onAccept]);
 
   const handleNoHover = useCallback(() => {
-    if (noAttempts > 1) {
+    if (noAttempts > 1 && !hideNoButton) {
       moveNoButton();
     }
-  }, [noAttempts, moveNoButton]);
+  }, [noAttempts, moveNoButton, hideNoButton]);
 
   const yesButton = (
     <motion.button
@@ -194,13 +185,13 @@ const ValentineQuestion = ({ onAccept }: ValentineQuestionProps) => {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-8 min-h-[120px]">
           {isSwapped ? (
             <>
-              {noButton}
+              {!hideNoButton && noButton}
               {yesButton}
             </>
           ) : (
             <>
               {yesButton}
-              {noButton}
+              {!hideNoButton && noButton}
             </>
           )}
         </div>

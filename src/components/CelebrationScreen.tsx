@@ -56,13 +56,12 @@ const CelebrationScreen = () => {
     };
   }, []);
 
-  const devJokes = [
-    "💾 Valentine status: CONFIRMED",
-    "🔒 Rollback: DISABLED",
-    "🚫 404: Rejection not found",
-    "✅ git commit -m 'added valentine'",
-    "📦 Deploying love to production...",
-    "⚡ Relationship.exe running smoothly",
+  const messages = [
+    "See you on 14th Feb ❤️",
+    "Looking forward to it",
+    "Can’t wait to meet you",
+    "Save the date 😊",
+    "It’s a date!",
   ];
 
   return (
@@ -110,7 +109,7 @@ const CelebrationScreen = () => {
           Verneise Seah & Kwun are now officially Valentines! 🎉
         </motion.p>
 
-        {/* Terminal-style jokes */}
+        {/* Terminal-style messages */}
         <motion.div
           className="bg-valentine-terminal-bg rounded-lg p-4 sm:p-5 text-left mx-auto shadow-celebration"
           initial={{ opacity: 0, y: 20 }}
@@ -127,7 +126,7 @@ const CelebrationScreen = () => {
           </div>
 
           <div className="font-mono text-xs sm:text-sm space-y-1.5">
-            {devJokes.map((joke, i) => (
+            {messages.map((msg, i) => (
               <motion.p
                 key={i}
                 className="text-valentine-terminal"
@@ -136,14 +135,14 @@ const CelebrationScreen = () => {
                 transition={{ delay: 1.2 + i * 0.3 }}
               >
                 <span className="text-valentine-terminal/50">$ </span>
-                {joke}
+                {msg}
               </motion.p>
             ))}
             <motion.p
               className="text-valentine-pink mt-3 font-bold"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.2 + devJokes.length * 0.3 }}
+              transition={{ delay: 1.2 + messages.length * 0.3 }}
             >
               <span className="text-valentine-terminal/50">→ </span>
               Happy Valentine's Day! 💕
