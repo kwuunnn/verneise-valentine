@@ -174,9 +174,9 @@ const ValentineQuestion = ({ onAccept }: ValentineQuestionProps) => {
           💌
         </motion.div>
 
-        <h1 className="text-2xl sm:text-4xl font-bold text-foreground mb-2 leading-tight">
+        {/* <h1 className="text-2xl sm:text-4xl font-bold text-foreground mb-2 leading-tight">
           Verneise Seah,
-        </h1>
+        </h1> */}
         <h2 className="text-xl sm:text-3xl font-bold text-gradient-valentine mb-8">
           Will you be my Valentine?
         </h2>
